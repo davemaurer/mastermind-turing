@@ -24,11 +24,7 @@ describe Mastermind do
     refute same
   end
 
-  it 'has a greet_player method' do
-    assert_output(/Hello!/) { @mm.greet_player }
-  end
-
-  it 'reads a player response to a prompt' do
+  it "reads a player's response to a prompt" do
     with_stdin do |player|
       player.puts 'y'
       @result = assert_equal 'Y', @mm.read_player_input
@@ -36,13 +32,25 @@ describe Mastermind do
     assert @result
   end
 
+  it 'properly reacts to player input' do
+    assert_output(/Quitting the game/) { @mm.react_to_input('Q') }
+  end
+
   describe 'game prompts' do
+    it 'greets a player' do
+      assert_output(/Hello!/) { @mm.greet_player }
+    end
+
     it 'plays a game' do
       assert_output(/I've made a secret key/) { @mm.ask_for_guess }
     end
 
     it 'quits a game' do
       assert_output(/Quitting the game/) { @mm.quit_game }
+    end
+
+    it 'gives instructions' do
+      assert_output(/This is how you play/) { @mm.give_instructions }
     end
   end
 

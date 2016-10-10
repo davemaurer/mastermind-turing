@@ -13,4 +13,8 @@ module Messages
   def say_goodbye
     puts 'Quitting the game. Come back soon!!!'
   end
+
+  def give_instructions
+    puts 'This is how you play'
+  end
 end
