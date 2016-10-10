@@ -35,15 +35,34 @@ describe Mastermind do
     end
   end
 
-  it 'starts a game' do
-    thread = Thread.new do
-      with_stdin do |player|
-        player.puts 'p'
-        input = @mm.read_player_input
-        assert_output(/I've made a secret key/) { @mm.react_to_input(input) }
+  describe 'game prompts' do
+    it 'starts a game' do
+      thread = Thread.new do
+        @mm.ask_to_play
+        with_stdin do |player|
+          player.puts 'p'
+          assert_output(/I've made a secret key/) { @mm.ask_to_play }
+        end
       end
+      thread.kill
     end
-    thread.kill
+
+    it 'quits a game' do
+      thread = Thread.new do
+        with_stdin do |player|
+          player.puts 'p'
+          input1 = @mm.read_player_input
+          @mm.react_to_input(input1)
+        end
+        with_stdin do |player|
+          player.puts 'q'
+          input2 = @mm.read_player_input
+          @result = assert_output(/Quitting the game. Come back soon!!!/) { @mm.react_to_input(input2) }
+        end
+      end
+      thread.kill
+      assert @result
+    end
   end
 
   private
