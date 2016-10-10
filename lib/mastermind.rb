@@ -1,4 +1,7 @@
+require_relative 'messages'
+
 class Mastermind
+  include Messages
   attr_reader :secret
 
   def initialize
@@ -14,10 +17,6 @@ class Mastermind
     secret = ''
     4.times { secret << key[rand(0..3)] }
     secret
-  end
-
-  def greet_player
-    "Hello! Let's play Mastermind!"
   end
 
   def read_player_input
