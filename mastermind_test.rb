@@ -30,7 +30,7 @@ describe Mastermind do
     assert result.message.downcase.include?('win')
   end
 
-  it 'captures a player response' do
+  it 'reads a player response to a prompt' do
     with_stdin do |player|
       player.puts 'y'
       assert_equal 'y', @mm.read_player_input
