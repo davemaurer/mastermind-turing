@@ -9,4 +9,8 @@ module Messages
           You can enter a guess by typing four letters as in the example. What is
           your guess? : "
   end
+
+  def say_goodbye
+    puts 'Quitting the game. Come back soon!!!'
+  end
 end

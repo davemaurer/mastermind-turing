@@ -25,7 +25,8 @@ class Mastermind
 
   def react_to_input(input)
     play = lambda { play_game }
-    responses = { 'P' => play }
+    quit = lambda { quit_game }
+    responses = { 'P' => play, 'Q' => quit }
     responses[input].call
   end
 
@@ -37,6 +38,10 @@ class Mastermind
   def play_game
     ask_for_guess
     react_to_input(read_player_input)
+  end
+
+  def quit_game
+    say_goodbye
   end
 end
 
