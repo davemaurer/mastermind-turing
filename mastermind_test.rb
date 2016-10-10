@@ -2,14 +2,24 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/mastermind'
 
-class MastermindTest < Minitest::Test
-  def test_it_exists
-    assert MastermindTest
+describe Mastermind do
+  before do
+    @mm = Mastermind.new
   end
 
-  def test_it_wins
+  it 'exists' do
+    assert Mastermind
+  end
+
+  it 'starts with a winning combination' do
+    assert @mm.secret
+    assert_equal 4, mm.secret.length
+  end
+
+  it 'wins' do
+    skip
     mm = Mastermind.new
-    result = mm.execute("BBGB")
+    result = @mm.execute("BBGB")
     assert result.message.downcase.include?("win")
   end
 end
