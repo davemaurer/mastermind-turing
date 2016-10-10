@@ -31,15 +31,14 @@ describe Mastermind do
   it 'reads a player response to a prompt' do
     with_stdin do |player|
       player.puts 'y'
-      assert_equal 'Y', @mm.read_player_input
+      @result = assert_equal 'Y', @mm.read_player_input
     end
+    assert @result
   end
 
   describe 'game prompts' do
     it 'starts a game' do
-      skip
       thread = Thread.new do
-        @mm.ask_to_play
         with_stdin do |player|
           player.puts 'p'
           @result = assert_output(/I've made a secret key/) { @mm.ask_to_play }
