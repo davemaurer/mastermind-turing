@@ -35,6 +35,15 @@ describe Mastermind do
     end
   end
 
+  it 'starts a game' do
+    skip
+    with_stdin do |player|
+      player.puts 'p'
+      input = @mm.read_player_input
+      assert_output(/I've made a secret key/) { @mm.react_to_input(input) }
+    end
+  end
+
   private
   def with_stdin
     stdin = $stdin

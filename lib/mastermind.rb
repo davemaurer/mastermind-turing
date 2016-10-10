@@ -3,7 +3,6 @@ require_relative 'messages'
 class Mastermind
   include Messages
   attr_reader :secret
-  attr_accessor :input
 
   def initialize
     @secret = create_secret
@@ -24,11 +23,22 @@ class Mastermind
     gets.chomp.upcase
   end
 
-  def start_game
+  def react_to_input(input)
+    play = lambda { play_game }
+    responses = { 'P' => play }
+    responses[input].call
+  end
+
+  def ask_to_play
     greet_player
-    react_to_input(read_player_input, 'instructions_only')
+    react_to_input(read_player_input)
+  end
+
+  def play_game
+    ask_for_guess
+    react_to_input(read_player_input)
   end
 end
 
 # mm = Mastermind.new
-# mm.start_game
+# mm.ask_to_play
