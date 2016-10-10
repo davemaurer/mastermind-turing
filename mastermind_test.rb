@@ -37,15 +37,8 @@ describe Mastermind do
   end
 
   describe 'game prompts' do
-    it 'starts a game' do
-      thread = Thread.new do
-        with_stdin do |player|
-          player.puts 'p'
-          @result = assert_output(/I've made a secret key/) { @mm.ask_to_play }
-        end
-      end
-      thread.kill
-      assert @result
+    it 'plays a game' do
+      assert_output(/I've made a secret key/) { @mm.ask_for_guess }
     end
 
     it 'quits a game' do
