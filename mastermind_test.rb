@@ -36,12 +36,14 @@ describe Mastermind do
   end
 
   it 'starts a game' do
-    skip
-    with_stdin do |player|
-      player.puts 'p'
-      input = @mm.read_player_input
-      assert_output(/I've made a secret key/) { @mm.react_to_input(input) }
+    thread = Thread.new do
+      with_stdin do |player|
+        player.puts 'p'
+        input = @mm.read_player_input
+        assert_output(/I've made a secret key/) { @mm.react_to_input(input) }
+      end
     end
+    thread.kill
   end
 
   private
