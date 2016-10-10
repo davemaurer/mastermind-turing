@@ -17,7 +17,7 @@ class Mastermind
   end
 
   def greet_player
-    puts "\n Hello! Let's play Mastermind!"
+    "Hello! Let's play Mastermind!"
   end
 
   def read_player_input

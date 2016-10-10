@@ -24,10 +24,8 @@ describe Mastermind do
     refute same
   end
 
-  it 'wins' do
-    skip
-    result = @mm.execute('BBGB')
-    assert result.message.downcase.include?('win')
+  it 'has a greet_player method' do
+    assert_includes @mm.greet_player, 'Hello!'
   end
 
   it 'reads a player response to a prompt' do
@@ -35,6 +33,12 @@ describe Mastermind do
       player.puts 'y'
       assert_equal 'y', @mm.read_player_input
     end
+  end
+
+  it 'wins' do
+    skip
+    result = @mm.execute('BBGB')
+    assert result.message.downcase.include?('win')
   end
 
   private
