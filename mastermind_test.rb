@@ -13,12 +13,11 @@ describe Mastermind do
 
   it 'starts with a winning combination' do
     assert @mm.secret
-    assert_equal 4, mm.secret.length
+    assert_equal 4, @mm.secret.length
   end
 
   it 'wins' do
     skip
-    mm = Mastermind.new
     result = @mm.execute("BBGB")
     assert result.message.downcase.include?("win")
   end
