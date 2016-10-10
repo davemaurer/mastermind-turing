@@ -25,20 +25,14 @@ describe Mastermind do
   end
 
   it 'has a greet_player method' do
-    assert_includes @mm.greet_player, 'Hello!'
+    assert_output(/Hello!/) { @mm.greet_player }
   end
 
   it 'reads a player response to a prompt' do
     with_stdin do |player|
       player.puts 'y'
-      assert_equal 'y', @mm.read_player_input
+      assert_equal 'Y', @mm.read_player_input
     end
-  end
-
-  it 'wins' do
-    skip
-    result = @mm.execute('BBGB')
-    assert result.message.downcase.include?('win')
   end
 
   private
