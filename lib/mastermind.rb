@@ -76,5 +76,5 @@ class Mastermind
   end
 end
 
-mm = Mastermind.new
-mm.ask_to_play
+# mm = Mastermind.new
+# mm.ask_to_play

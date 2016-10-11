@@ -36,6 +36,11 @@ describe Mastermind do
     it 'properly reacts to player input' do
       assert_output(/Quitting the game/) { @mm.react_to_input('Q') }
     end
+
+    it 'has a play_game method' do
+      skip
+      assert @mm.respond_to?(play_game)
+    end
   end
 
   describe 'game prompts' do
@@ -52,7 +57,7 @@ describe Mastermind do
     end
 
     it 'gives instructions' do
-      assert_output(/This is how you play/) { @mm.give_instructions }
+      assert_output(/Once you hit/) { @mm.print_instructions }
     end
   end
 
