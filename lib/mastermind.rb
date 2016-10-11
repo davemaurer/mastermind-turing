@@ -26,7 +26,7 @@ class Mastermind
     guess        = input.chars
     play         = lambda { play_game }
     quit         = lambda { quit_game }
-    cheat        = lambda { cheat_to_win }
+    cheat        = lambda { try_to_cheat }
     instructions = lambda { give_instructions }
     responses    = { 'P' => play, 'Q' => quit, 'C' => cheat, 'I' => instructions }
     if responses.include?(input)
@@ -86,7 +86,7 @@ class Mastermind
     react_to_input(read_player_input)
   end
 
-  def cheat_to_win
+  def try_to_cheat
     @started ? win_by_cheating : print_cant_cheat_yet
     react_to_input(read_player_input)
   end
