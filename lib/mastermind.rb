@@ -59,8 +59,12 @@ class Mastermind
   end
 
   def give_instructions
-    print_instructions
-    react_to_input(read_player_input)
+    if !@started
+      print_instructions
+    else
+      announce_invalid_input(@started)
+    end
+      react_to_input(read_player_input)
   end
 
   def cheat_to_win
