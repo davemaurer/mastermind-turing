@@ -43,15 +43,22 @@ class Mastermind
   end
 
   def play_game
-    ask_for_guess
+    if @started
+      announce_invalid_input(@started)
+    else
+      @started = true
+      ask_for_guess
+    end
     react_to_input(read_player_input)
   end
 
   def quit_game
+    @started = false
     say_goodbye
   end
 
   def cheat_to_win
+    @started = false
     give_answer(secret)
     ask_to_play_again
     react_to_input(read_player_input)
