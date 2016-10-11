@@ -41,4 +41,8 @@ module Messages
     puts "You guessed #{color_count} correct colors, and #{position_count} correct positions.
           Please enter another guess."
   end
+
+  def print_player_wins(guess)
+    puts "Congratulations! You guessed the secret answer, which was #{guess}! Nice job!!!"
+  end
 end

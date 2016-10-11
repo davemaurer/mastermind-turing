@@ -11,10 +11,6 @@ class Mastermind
     @valid_letters = ['R', 'B', 'G', 'Y']
   end
 
-  def execute
-
-  end
-
   def create_secret
     key    = 'BRGY'
     secret = ''
@@ -47,11 +43,11 @@ class Mastermind
   end
 
   def evaluate_guess(guess)
-
     correct_colors    = 0
     correct_positions = 0
     key               = secret.chars
     colors            = guess.uniq
+    return declare_winner(guess) if guess == key
     guess.each_with_index do |letter, index|
       correct_positions += 1 if letter == key[index]
     end
@@ -59,6 +55,14 @@ class Mastermind
       correct_colors += 1 if key.include?(color)
     end
     give_guess_feedback(correct_colors, correct_positions)
+    react_to_input(read_player_input)
+  end
+
+  def declare_winner(guess)
+    print_player_wins(guess)
+    @started = false
+    @secret = create_secret
+    ask_to_play_again
     react_to_input(read_player_input)
   end
 
