@@ -43,17 +43,12 @@ class Mastermind
   end
 
   def evaluate_guess(guess)
+    key               = secret.chars
     correct_colors    = 0
     correct_positions = 0
-    key               = secret.chars
-    colors            = guess.uniq
     return declare_winner(guess) if guess == key
-    guess.each_with_index do |letter, index|
-      correct_positions += 1 if letter == key[index]
-    end
-    colors.each do |color|
-      correct_colors += 1 if key.include?(color)
-    end
+    guess.each_with_index { |letter, index| correct_positions += 1 if letter == key[index] }
+    guess.uniq.each { |color| correct_colors += 1 if key.include?(color) }
     give_guess_feedback(correct_colors, correct_positions)
     react_to_input(read_player_input)
   end
@@ -87,20 +82,20 @@ class Mastermind
   end
 
   def give_instructions
-    if !@started
-      print_instructions
-    else
-      announce_invalid_input(@started)
-    end
-      react_to_input(read_player_input)
+    !@started ? print_instructions : announce_invalid_input(@started)
+    react_to_input(read_player_input)
   end
 
   def cheat_to_win
+    @started ? win_by_cheating : print_cant_cheat_yet
+    react_to_input(read_player_input)
+  end
+
+  def win_by_cheating
     @started = false
     print_answer(secret)
     @secret = create_secret
     ask_to_play_again
-    react_to_input(read_player_input)
   end
 
   def ask_for_clarification

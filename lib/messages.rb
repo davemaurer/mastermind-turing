@@ -25,7 +25,7 @@ module Messages
   end
 
   def ask_to_play_again
-    puts 'Would you like to (p)lay again? If not you can (q)uit.'
+    puts 'Would you like to (p)lay again? If not you can (q)uit, or get the (i)nstructions.'
   end
 
   def announce_invalid_input(started)
@@ -44,5 +44,9 @@ module Messages
 
   def print_player_wins(guess)
     puts "Congratulations! You guessed the secret answer, which was #{guess}! Nice job!!!"
+  end
+
+  def print_cant_cheat_yet
+    puts "Trying to cheat already? You haven't even started the game yet. Press p first."
   end
 end
