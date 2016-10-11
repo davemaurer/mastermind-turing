@@ -33,9 +33,16 @@ class Mastermind
     responses = { 'P' => play, 'Q' => quit, 'C' => cheat, 'I' => instructions }
     if responses.include?(input)
       responses[input].call
+    elsif is_a_guess?(input)
+      evaluate_guess(input)
     else
       ask_for_clarification
     end
+  end
+
+  def is_a_guess?(input)
+    valid_letters = ['RBGY']
+    input.length == 4 && input.all? { |letter| valid_letters.include?(letter) }
   end
 
   def ask_to_play
