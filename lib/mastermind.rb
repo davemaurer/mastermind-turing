@@ -2,12 +2,13 @@ require_relative 'messages'
 
 class Mastermind
   include Messages
-  attr_reader   :secret
+  attr_reader   :secret, :valid_letters
   attr_accessor :started
 
   def initialize
-    @secret =  create_secret
-    @started = false
+    @secret        = create_secret
+    @started       = false
+    @valid_letters = ['R', 'B', 'G', 'Y']
   end
 
   def execute
@@ -26,23 +27,39 @@ class Mastermind
   end
 
   def react_to_input(input)
-    play = lambda { play_game }
-    quit = lambda { quit_game }
-    cheat = lambda { cheat_to_win }
+    guess        = input.chars
+    play         = lambda { play_game }
+    quit         = lambda { quit_game }
+    cheat        = lambda { cheat_to_win }
     instructions = lambda { give_instructions }
-    responses = { 'P' => play, 'Q' => quit, 'C' => cheat, 'I' => instructions }
+    responses    = { 'P' => play, 'Q' => quit, 'C' => cheat, 'I' => instructions }
     if responses.include?(input)
       responses[input].call
-    elsif is_a_guess?(input)
-      evaluate_guess(input)
+    elsif is_a_guess?(guess)
+      evaluate_guess(guess)
     else
       ask_for_clarification
     end
   end
 
-  def is_a_guess?(input)
-    valid_letters = ['RBGY']
-    input.length == 4 && input.all? { |letter| valid_letters.include?(letter) }
+  def is_a_guess?(guess)
+    guess.length == 4 && guess.all? { |letter| valid_letters.include?(letter) }
+  end
+
+  def evaluate_guess(guess)
+    correct_colors    = 0
+    correct_positions = 0
+    key               = secret.chars
+    colors            = guess.uniq
+    guess.each_with_index do |letter, index|
+      correct_positions += 1 if letter == key[index]
+    end
+    colors.each do |color|
+      correct_colors += 1 if key.include?(color)
+    end
+    require 'pry' ; binding.pry
+    give_guess_feedback(correct_colors, correct_positions)
+    react_to_input(read_player_input)
   end
 
   def ask_to_play
@@ -87,5 +104,5 @@ class Mastermind
   end
 end
 
-# mm = Mastermind.new
-# mm.ask_to_play
+mm = Mastermind.new
+mm.ask_to_play

@@ -17,8 +17,7 @@ module Messages
   def print_instructions
     puts "Once you hit (p)lay, you will guess four colors from (R)ed, (B)lue, (G)reen (Y)ellow.
           an example guess looks like this: gryg . After you guess, I will tell you how many colors
-          you got right, and how many positions you got right, but not if any of the guesses were in
-          the right positions. Got it? Ok, let's play."
+          you got right, and how many positions you got right. Got it? Ok, let's play."
   end
 
   def print_answer(secret)
@@ -36,5 +35,10 @@ module Messages
     else
       puts err + 'Please enter a command. (p)lay, (q)uit, (i)nstructions.'
     end
+  end
+
+  def give_guess_feedback(color_count, position_count)
+    puts "You guessed #{color_count} correct colors, and #{position_count} correct positions.
+          Please enter another guess."
   end
 end
