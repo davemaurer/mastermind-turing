@@ -17,4 +17,21 @@ module Messages
   def give_instructions
     puts 'This is how you play'
   end
+
+  def give_answer(secret)
+    puts "The answer is #{secret}. And. You CHEATED!!!"
+  end
+
+  def ask_to_play_again
+    puts 'Would you like to (p)lay again? If not you can (q)uit.'
+  end
+
+  def announce_invalid_input(started)
+    err = "I can 't understand that. "
+    if started
+      puts err + 'Please enter a guess (example: bgry) or you can (q)uit.'
+    else
+      puts err + 'Please enter a command. (p)lay, (q)uit, (i)nstructions.'
+    end
+  end
 end
