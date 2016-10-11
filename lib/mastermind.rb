@@ -29,7 +29,8 @@ class Mastermind
     play = lambda { play_game }
     quit = lambda { quit_game }
     cheat = lambda { cheat_to_win }
-    responses = { 'P' => play, 'Q' => quit, 'C' => cheat }
+    instructions = lambda { give_instructions }
+    responses = { 'P' => play, 'Q' => quit, 'C' => cheat, 'I' => instructions }
     if responses.include?(input)
       responses[input].call
     else
@@ -57,9 +58,14 @@ class Mastermind
     say_goodbye
   end
 
+  def give_instructions
+    print_instructions
+    react_to_input(read_player_input)
+  end
+
   def cheat_to_win
     @started = false
-    give_answer(secret)
+    print_answer(secret)
     ask_to_play_again
     react_to_input(read_player_input)
   end

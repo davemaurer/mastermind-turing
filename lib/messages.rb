@@ -14,11 +14,14 @@ module Messages
     puts 'Quitting the game. Come back soon!!!'
   end
 
-  def give_instructions
-    puts 'This is how you play'
+  def print_instructions
+    puts "Once you hit (p)lay, you will guess four colors from (R)ed, (B)lue, (G)reen (Y)ellow.
+          an example guess looks like this: gryg . After you guess, I will tell you how many colors
+          you got right, and how many positions you got right, but not if any of the guesses were in
+          the right positions. Got it? Ok, let's play."
   end
 
-  def give_answer(secret)
+  def print_answer(secret)
     puts "The answer is #{secret}. And. You CHEATED!!!"
   end
 
