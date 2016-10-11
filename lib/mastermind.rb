@@ -35,7 +35,7 @@ class Mastermind
     responses    = { 'P' => play, 'Q' => quit, 'C' => cheat, 'I' => instructions }
     if responses.include?(input)
       responses[input].call
-    elsif is_a_guess?(guess)
+    elsif is_a_guess?(guess) && @started
       evaluate_guess(guess)
     else
       ask_for_clarification
@@ -47,6 +47,7 @@ class Mastermind
   end
 
   def evaluate_guess(guess)
+
     correct_colors    = 0
     correct_positions = 0
     key               = secret.chars
@@ -57,7 +58,6 @@ class Mastermind
     colors.each do |color|
       correct_colors += 1 if key.include?(color)
     end
-    require 'pry' ; binding.pry
     give_guess_feedback(correct_colors, correct_positions)
     react_to_input(read_player_input)
   end
@@ -94,6 +94,7 @@ class Mastermind
   def cheat_to_win
     @started = false
     print_answer(secret)
+    @secret = create_secret
     ask_to_play_again
     react_to_input(read_player_input)
   end
