@@ -43,7 +43,8 @@ module Messages
   end
 
   def print_player_wins(guess, time, guesses)
-    puts "Congratulations! You guessed the secret answer, which was #{guess}! It took you #{time} seconds and #{guesses}. Nice job!!!"
+    puts "Congratulations! You guessed the secret answer, which was #{guess}!
+          It took you #{time} seconds and #{guesses} guesses. Nice job!!!"
   end
 
   def print_cant_cheat_yet

@@ -49,11 +49,11 @@ class Mastermind
     key               = @secret.chars
     correct_colors    = 0
     correct_positions = 0
+    @guess_counter += 1
     return declare_winner(guess) if guess == key
     guess.each_with_index { |letter, index| correct_positions += 1 if letter == key[index] }
     guess.uniq.each { |color| correct_colors += 1 if key.include?(color) }
     give_guess_feedback(correct_colors, correct_positions)
-    @guess_counter += 1
     react_to_input(read_player_input)
   end
 
