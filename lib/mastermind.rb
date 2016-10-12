@@ -57,7 +57,8 @@ class Mastermind
 
   def declare_winner(guess)
     timer.stop
-    print_player_wins(guess)
+    time = timer.time_taken
+    print_player_wins(guess, time)
     @started = false
     @secret = create_secret
     ask_to_play_again
