@@ -42,8 +42,8 @@ module Messages
           Please enter another guess."
   end
 
-  def print_player_wins(guess, time)
-    puts "Congratulations! You guessed the secret answer, which was #{guess}! It took you #{time} seconds. Nice job!!!"
+  def print_player_wins(guess, time, guesses)
+    puts "Congratulations! You guessed the secret answer, which was #{guess}! It took you #{time} seconds and #{guesses}. Nice job!!!"
   end
 
   def print_cant_cheat_yet

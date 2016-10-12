@@ -4,13 +4,14 @@ require_relative 'timer'
 class Mastermind
   include Messages
   attr_reader   :secret, :valid_letters
-  attr_accessor :started, :timer
+  attr_accessor :started, :timer, :guess_counter
 
   def initialize
     @secret        = create_secret
     @started       = false
     @valid_letters = ['R', 'B', 'G', 'Y']
     @timer         = Timer.new
+    @guess_counter = 0
   end
 
   def create_secret
@@ -45,26 +46,29 @@ class Mastermind
   end
 
   def evaluate_guess(guess)
-    key               = secret.chars
+    key               = @secret.chars
     correct_colors    = 0
     correct_positions = 0
     return declare_winner(guess) if guess == key
     guess.each_with_index { |letter, index| correct_positions += 1 if letter == key[index] }
     guess.uniq.each { |color| correct_colors += 1 if key.include?(color) }
     give_guess_feedback(correct_colors, correct_positions)
+    @guess_counter += 1
     react_to_input(read_player_input)
   end
 
   def declare_winner(guess)
-    timer.stop
-    time = timer.time_taken
-    print_player_wins(guess, time)
+    @timer.stop
+    time = @timer.time_taken
+    formatted_guess = guess.join
+    print_player_wins(formatted_guess, time, @guess_counter)
     reset
   end
 
   def reset
     @started = false
     @secret = create_secret
+    @guess_counter = 0
     ask_to_play_again
     react_to_input(read_player_input)
   end
@@ -79,7 +83,7 @@ class Mastermind
       announce_invalid_input(@started)
     else
       @started = true
-      timer.start
+      @timer.start
       ask_for_guess
     end
     react_to_input(read_player_input)
@@ -102,7 +106,7 @@ class Mastermind
 
   def win_by_cheating
     @started = false
-    print_answer(secret)
+    print_answer(@secret)
     @secret = create_secret
     ask_to_play_again
   end
