@@ -1,13 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/mastermind'
+require '../lib/mastermind'
 
 describe Mastermind do
   before do
     @mm = Mastermind.new
   end
 
-  describe 'mastermind' do
+  describe 'game play' do
     it 'exists' do
       assert Mastermind
     end
