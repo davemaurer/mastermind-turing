@@ -59,6 +59,10 @@ class Mastermind
     timer.stop
     time = timer.time_taken
     print_player_wins(guess, time)
+    reset
+  end
+
+  def reset
     @started = false
     @secret = create_secret
     ask_to_play_again
