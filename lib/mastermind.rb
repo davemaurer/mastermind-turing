@@ -1,14 +1,16 @@
 require_relative 'messages'
+require_relative 'timer'
 
 class Mastermind
   include Messages
   attr_reader   :secret, :valid_letters
-  attr_accessor :started
+  attr_accessor :started, :timer
 
   def initialize
     @secret        = create_secret
     @started       = false
     @valid_letters = ['R', 'B', 'G', 'Y']
+    @timer         = Timer.new
   end
 
   def create_secret
@@ -54,6 +56,7 @@ class Mastermind
   end
 
   def declare_winner(guess)
+    timer.stop
     print_player_wins(guess)
     @started = false
     @secret = create_secret
@@ -71,6 +74,7 @@ class Mastermind
       announce_invalid_input(@started)
     else
       @started = true
+      timer.start
       ask_for_guess
     end
     react_to_input(read_player_input)
