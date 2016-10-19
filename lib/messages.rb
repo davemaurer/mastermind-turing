@@ -28,9 +28,9 @@ module Messages
     puts 'Would you like to (p)lay again? If not you can (q)uit, or get the (i)nstructions.'
   end
 
-  def announce_invalid_input(started)
+  def announce_invalid_input(game_started)
     err = "I can 't understand that. "
-    if started
+    if game_started
       puts err + 'Please enter a guess (example: bgry) or you can (q)uit.'
     else
       puts err + 'Please enter a command. (p)lay, (q)uit, (i)nstructions.'
