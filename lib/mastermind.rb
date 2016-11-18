@@ -42,19 +42,23 @@ class Mastermind
   end
 
   def is_a_guess?(guess)
-    guess.length == 4 && guess.all? { |letter| valid_letters.include?(letter) }
+    guess.length == @secret.length && guess.all? { |letter| valid_letters.include?(letter) }
   end
 
   def evaluate_guess(guess)
     key               = @secret.chars
-    correct_colors    = 0
     correct_positions = 0
     @guess_counter += 1
     return declare_winner(guess) if guess == key
     guess.each_with_index { |letter, index| correct_positions += 1 if letter == key[index] }
-    guess.uniq.each { |color| correct_colors += 1 if key.include?(color) }
-    give_guess_feedback(correct_colors, correct_positions)
+    give_guess_feedback(count_correct_colors(guess, key), correct_positions)
     react_to_input(read_player_input)
+  end
+
+  def count_correct_colors(guess, key)
+    correct_colors = 0
+    guess.uniq.each { |color| correct_colors += 1 if key.include?(color) }
+    correct_colors
   end
 
   def declare_winner(guess)
