@@ -127,5 +127,7 @@ class Mastermind
   end
 end
 
-mm = Mastermind.new
-mm.ask_to_play
+if __FILE__ == $0
+  mm = Mastermind.new
+  mm.ask_to_play
+end
