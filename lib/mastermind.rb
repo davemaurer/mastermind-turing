@@ -46,10 +46,12 @@ class Mastermind
   end
 
   def evaluate_guess(guess)
-    key = @secret.chars
+    key            = @secret.chars
+    color_count    = count_correct_colors(guess, key)
+    position_count = count_correct_positions(guess, key)
     @guess_counter += 1
     return declare_winner(guess) if guess == key
-    give_guess_feedback(count_correct_colors(guess, key), count_correct_positions(guess, key))
+    give_guess_feedback(color_count, position_count)
     react_to_input(read_player_input)
   end
 
