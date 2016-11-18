@@ -92,11 +92,15 @@ class Mastermind
     if @started
       announce_invalid_input(@started)
     else
-      @started = true
-      @timer.start
-      ask_for_guess
+      start_game
     end
     react_to_input(read_player_input)
+  end
+
+  def start_game
+    @started = true
+    @timer.start
+    ask_for_guess
   end
 
   def quit_game
