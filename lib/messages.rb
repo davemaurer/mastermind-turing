@@ -5,14 +5,14 @@ module Messages
   end
 
   def ask_for_guess
-    puts "I've made a secret key out of the first letters in the colors 
-          (R)ed, (B)lue, (G)reen, and (Y)ellow. An example secret would be RBBY.
-          You can enter a guess by typing four letters as in the example. What is
-          your guess? : "
+    puts "  I've made a secret key out of the first letters in the colors 
+  (R)ed, (B)lue, (G)reen, and (Y)ellow. An example secret would be RBBY.
+  You can enter a guess by typing four letters as in the example. What is
+  your guess? : "
   end
 
   def say_goodbye
-    puts 'Quitting the game. Come back soon!!!'
+    puts "  Quitting the game. Come back soon!!!"
   end
 
   def print_instructions
@@ -26,15 +26,15 @@ module Messages
   end
 
   def ask_to_play_again
-    puts '  Would you like to (p)lay again? If not you can (q)uit, or get the (i)nstructions.'
+    puts "  Would you like to (p)lay again? If not you can (q)uit, or get the (i)nstructions."
   end
 
   def announce_invalid_input(game_started)
-    err = "I can't understand that. "
+    err = " I can't understand that. "
     if game_started
-      puts err + 'Please enter a guess (example: bgry) or you can (q)uit.'
+      puts err + "Please enter a guess (example: bgry) or you can (q)uit."
     else
-      puts err + 'Please enter a command. (p)lay, (q)uit, (i)nstructions.'
+      puts err + "Please enter a command. (p)lay, (q)uit, (i)nstructions."
     end
   end
 
@@ -49,6 +49,6 @@ module Messages
   end
 
   def print_cant_cheat_yet
-    puts "Trying to cheat already? You haven't even started the game yet. Press p first."
+    puts "  Trying to cheat already? You haven't even started the game yet. Press p first."
   end
 end
