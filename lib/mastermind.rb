@@ -17,7 +17,7 @@ class Mastermind
   def create_secret
     key    = 'BRGY'
     secret = ''
-    4.times { secret << key[rand(0..3)] }
+    4.times { secret << key[rand(3)] }
     secret
   end
 
