@@ -89,11 +89,7 @@ class Mastermind
   end
 
   def play_game
-    if @started
-      announce_invalid_input(@started)
-    else
-      start_game
-    end
+    @started ? announce_invalid_input(@started) : start_game
     react_to_input(read_player_input)
   end
 
