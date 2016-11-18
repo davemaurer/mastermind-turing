@@ -85,6 +85,7 @@ class Mastermind
 
   def ask_to_play
     greet_player
+    print_instructions
     react_to_input(read_player_input)
   end
 
