@@ -1,6 +1,7 @@
 module Messages
   def greet_player
-    puts "Hello! Let's play Mastermind!"
+    puts "Hello! Let's play Mastermind!
+         \nenter p to play, i for instructions, or q to quit."
   end
 
   def ask_for_guess
