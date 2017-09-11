@@ -42,7 +42,11 @@ class Mastermind
   end
 
   def is_a_guess?(guess)
-    guess.length == @secret.length && guess.all? { |letter| valid_letters.include?(letter) }
+    (guess.length == @secret.length) && valid_letters?(guess)
+  end
+
+  def valid_letters?(guess)
+    guess.all? { |letter| valid_letters.include?(letter) }
   end
 
   def evaluate_guess(guess)
